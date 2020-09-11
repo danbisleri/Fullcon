@@ -1,0 +1,285 @@
+﻿@model Domain.KnowBase
+@addTagHelper *, Fluxmatix.AspNetCore.TagHelpers.QuillEditor
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<environment include="Development">
+    <quill-editor-style-sheets></quill-editor-style-sheets>
+</environment>
+
+@*<script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>*@
+@*<script src="~/js/ie10-viewport-bug-workaround.js"></script>*@
+
+<br />
+<h2 style="text-align:center">Knowledge Base</h2>
+<hr />
+<div class="panel-body pan">
+    @*<div class="row">*@
+    <div class="col-md-12 row">
+        <form asp-action="Create" asp-controller="KnowBases" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @if (Model != null && Model.Id > 0)
+            {
+                <input type="hidden" asp-for="Id" />
+            }
+
+            <div class="form-group row">
+                <div class="col-md-1">
+                    <label asp-for="descricao" class="control-label">Descrição</label>
+                </div>
+                <div class="col-md-11">
+                    <input asp-for="descricao" class="form-control" />
+                    <span asp-validation-for="descricao" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                @*<div class="col-md-1">
+                    <label asp-for="erro" class="control-label">Mensagem</label>
+                </div>*@
+                <div class="col-md-12">
+                    @*<textarea class="editor" id="erro" asp-for="erro" style="height: 150px"></textarea>*@
+                    <label asp-for="erro" class="control-label">Mensagem</label>
+                    <quill-editor id="erro" asp-for="erro" style="background-color:white ; height: 150px">
+
+                    </quill-editor>
+                </div>
+
+            </div>
+
+            @*<br />
+            <br />*@
+
+            <div class="form-group row">
+                @*<div class="col-md-1">
+                    <label asp-for="solucao" class="control-label">Solução</label>
+                </div>*@
+                <div class="col-md-12">
+                    <label asp-for="solucao" class="control-label">Solução</label>
+                    <quill-editor id="solucao" asp-for="solucao" style="background-color:white ; height: 150px">
+
+                    </quill-editor>
+                </div>
+
+            </div>
+            @*<br />
+            <br />*@
+
+            <div class="form-group row">
+                @*<div class="col-md-1">
+                    <label asp-for="obs" class="control-label">Observação</label>
+                </div>*@
+                <div class="col-md-12">
+                    <label asp-for="obs" class="control-label">Observação</label>
+                    <quill-editor id="obs" asp-for="obs" style="background-color:white ; height: 150px">
+
+                    </quill-editor>
+                </div>
+            </div>
+
+
+            <div id="field" class="file">
+                @if (Model == null)
+                {
+                    <div id="field0">
+                        @*<partial name="_File" />*@
+                    </div>
+                }
+                else
+                {
+                    @if (Model.knowbaseanexo != null && Model.knowbaseanexo.Any())
+                    {
+                        foreach (var item in Model.knowbaseanexo.OrderBy(n => n.nome))
+                        {
+                            <div class="form-group row">
+                                <input type="hidden" name="idAnexo" asp-for="@item.Id" />
+        
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-success btn-sm mdi mdi-download " onclick="location.href='@Url.Action("DownloadAsync","KnowBaseAnexos", new { id = item.Id })'"></button>
+                                </div>
+
+                                <div class="col-md-10">
+                                    @Html.DisplayFor(Model => item.nome)
+                                </div>
+
+                                <div class="col-md-1" style="text-align:right">
+                                    <button type="button" class="btn btn-danger btn-sm mdi mdi-delete " onclick="abremodaldelknowanexo(@item.Id)"></button>
+
+                                </div>
+                            </div>
+
+                        }
+                    }
+                    <div id="field0">
+                        @*<partial name="_File" />*@
+                    </div>
+                }
+
+            </div>
+
+            <!-- Button -->
+            <div class="form-group row">
+                @*<div class="col-md-1">
+                </div>*@
+                <div class="col-md-11">
+                    <input id="add-more" name="add-more" value="Add File" class="btn btn-default col-2" type="button" />
+                </div>
+            </div>
+
+            <br />
+            <br />
+
+            <div class="row">
+                <div class="col-md-1">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
+                <div class="col-md-10">
+                </div>
+                <div class="col-md-1">
+                    @if (Model != null)
+                    {
+                        <input class="btn btn-danger" value="Remove" onclick="abremodaldelknow(@Model.Id)" type="button">
+                    }
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </form>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <quill-editor-script for-editors="obs,solucao,erro"></quill-editor-script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready( function () {
+
+            $('div').before(function () {
+                $(this).removeAttr('data-placeholder');
+            });
+
+            $('#ql-editor').after(function () {
+                $(this).style.backgroundColor = 'white';
+            });
+
+            var nFiledAdd = 0;
+            var nextField = 0;
+            $("#add-more").click(function (e) {
+
+                e.preventDefault();
+                
+                var addto = "#field0";
+                var _link = $('#field0').html();
+
+                nextField = nextField + 1;
+
+                if (nFiledAdd > 0 ) 
+                    addto = "#field" + nFiledAdd;
+
+                for (var i = nFiledAdd; i >= 0; i--) {
+                    if ($(addto).length > 0) {
+                        break;
+                    } else {
+                        addto = "#field" + i;
+                    }
+                }
+
+                //prompt("Copy to clipboard: Ctrl+C, Enter", _link);
+
+                var inputDelete = '<div id="field' + nextField + '" name="field' + nextField + '"  > ' + _link.replace(/value[^>]*(.*?)\s*\s*/g, '') + '<div class="form-group row" id="remove' + (nextField) + '" ><input type = "file" id = "action_file" name = "file" class="input-file col-md-11" ><div class="col-md-1" style="text-align:right"><button id="remove' + (nextField) + '" type="button" class="btn btn-danger btn-sm mdi mdi-delete remove-me"></button></div></div></div></div>'
+
+                //alert(newIn + removeBtn);
+                //prompt("Copy to clipboard: Ctrl+C, Enter", newIn + removeBtn);
+                $(addto).after(inputDelete);
+
+
+                $("#field" + nextField).attr('data-source', $(addto).attr('data-source'));
+                $("#count").val(nextField);
+
+                nFiledAdd = nFiledAdd + 1;
+
+                $('.remove-me').click(function (e) {
+                    e.preventDefault();
+                    var fieldNum = this.id.charAt(this.id.length - 1);
+                    var fieldID = "#field" + fieldNum;
+                    var divID = "#remove" + fieldNum;
+                    $(this).remove();
+                    $(fieldID).remove();
+                    $(divID).remove();
+                });
+            });
+
+        });
+
+
+
+        function abremodaldelknow(id) {
+            var modal = $('#modalDel');
+            var modalBody = modal.find('.modal-body');
+
+            $.ajax({
+                url: '@Url.Action("ModalDelKnow")',
+                data: { id: id },
+                success: function (data)
+                {
+                    modalBody.html(data);
+                    modal.modal();
+                }
+
+            })
+        };
+
+        function abremodaldelknowanexo(id) {
+            var modal = $('#modalDel');
+            var modalBody = modal.find('.modal-body');
+
+            $.ajax({
+                url: '@Url.Action("ModalDelAnexo")',
+                data: { id: id },
+                success: function (data)
+                {
+                    modalBody.html(data);
+                    modal.modal();
+                }
+
+            })
+        };
+
+    </script>
+}
+
+
+<div class="modal" id="modalDel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title text-center">Confirme a exclusão</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

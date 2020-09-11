@@ -1,0 +1,18 @@
+﻿@using FullCon2.Models
+@{
+    var alerts = TempData.ContainsKey(Alert.TempDataKey)
+        ? TempData[Alert.TempDataKey] as List<Alert>
+        : new List<Alert>();
+
+    foreach (var alert in alerts)
+    {
+        var dismissableClass = alert.Dismissable ? "alert-dismissable" : null;
+        <div style="text-align:center" class="alert alert-@alert.AlertStyle @dismissableClass">
+            @if (alert.Dismissable)
+            {
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            }
+            @Html.Raw(alert.Message)
+        </div>
+    }
+}

@@ -1,0 +1,29 @@
+﻿@model Domain.Clientes
+
+@if (Model.clienteanexos != null && Model.clienteanexos.Any())
+{
+    var line = 0;
+
+    <div class="form-group row">
+
+        @foreach (var anexo in Model.clienteanexos.OrderBy(n => n.nome))
+        {
+            line = line + 1;
+
+            <input type="hidden" name="idAnexo" asp-for="@anexo.Id" />
+
+            <div class="col-md-10">
+                <button type="button" class="btn btn-success btn-sm mdi mdi-download " onclick="location.href='@Url.Action("DownloadAsync","ClienteAnexos", new { id = anexo.Id })'"></button>
+                @Html.DisplayFor(Model => anexo.nome)
+            </div>
+
+            @if (line % 1 == 0)
+            {
+                <div class="form-group row">
+                    &nbsp;
+                </div>
+            }
+
+        }
+    </div>
+}

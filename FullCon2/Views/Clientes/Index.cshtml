@@ -1,0 +1,218 @@
+﻿@model IEnumerable<Domain.Clientes>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+
+@foreach (var item in Model)
+{
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <input type="hidden" name="cliid" asp-for="@item.Id" />
+                <div class="col-md-10">
+                    <h4>@Html.DisplayFor(modelItem => item.nome)</h4>
+                </div>
+                <div class="col-md-2" style="text-align:right">
+
+                    @if (!string.IsNullOrEmpty(item.obs))
+                    {
+                        <button type="button" class="btn btn-default btn-sm mdi mdi-information-variant" onclick="abremodalobs(@item.Id)"></button>
+                    }
+
+
+                    @if (item.clienteanexos.Any())
+                    {
+                        <button type="button" class="btn btn-success btn-sm mdi mdi-download" onclick="abremodalanexocli(@item.Id)"></button>
+                    }
+
+                    @if (item.clienteconexao.Any())
+                    {
+                        <button type="button" class="btn btn-cyan btn-sm mdi mdi-desktop-mac" onclick="location.href='@Url.Action("Index","ClienteConexoes", new { id = item.Id })'"></button>
+                    }
+
+
+                    <button type="button" class="btn btn-warning btn-sm mdi mdi-account-edit" onclick="location.href='@Url.Action("Edit", new { id = item.Id })'"></button>
+
+                </div>
+
+            </div>
+
+
+            @if (item.clientelinks != null && item.clientelinks.Any())
+            {
+                foreach (var link in item.clientelinks.OrderBy(o => o.nome))
+                {
+
+                    <div id="@link.Id" class="col-md-12 row">
+
+                        <div class="col-md-2" style="font-weight:bold;text-align:right">
+                            @Html.DisplayFor(modelItem => link.nome)
+                        </div>
+                        @if (!string.IsNullOrEmpty(@link.link))
+                        {
+                            <div class="td-cliente col-md-6 row">
+                                <div class="mdi">
+                                    <i class="icone fa fa-spinner fa-spin" style="font-size:13px"></i>
+                                    <br />
+                                </div>
+                                <a href="http://@link.link" target="_blank" class="link text-cyan "> @Html.DisplayFor(modelItem => link.link) </a>
+                            </div>
+                        }
+                        <div class="col-md-2" style="text-align:right">
+                            @Html.DisplayFor(modelItem => link.usuario)
+                        </div>
+                        <div class="col-md-2">
+                            @Html.DisplayFor(modelItem => link.senha)
+                        </div>
+                    </div>
+
+                }
+            }
+
+            @*<hr />*@
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+
+        var jqXHR;
+        var ajaxRequestsArray = [];
+
+
+        $(".btn").click(function (e) {
+            e.preventDefault();
+            for (var i = 0; i < ajaxRequestsArray.length; i++) {
+                var curRequest = ajaxRequestsArray[i];
+                curRequest.abort();
+            }
+        });
+
+        function abremodalanexocli(id) {
+            var modal = $('#modalAnexo');
+            var modalBody = modal.find('.modal-body');
+
+            $.ajax({
+                url: '@Url.Action("ModalAnexoCliente")',
+                data: { id: id },
+                success: function (data)
+                {
+                    modalBody.html(data);
+                    modal.modal();
+                }
+
+            })
+        };
+
+
+        function abremodalobs(id) {
+            var modal = $('#modalObs');
+            var modalBody = modal.find('.modal-body');
+
+            $.ajax({
+                url: '@Url.Action("ModalObs")',
+                data: { id: id },
+                success: function (data)
+                {
+                    modalBody.html(data);
+                    modal.modal();
+                }
+
+            })
+        };
+
+        function testeUrl() {
+            $('.td-cliente').each(function () {
+                var classeCarregando = 'icone fa fa-spinner fa-spin';
+
+                var item = $(this);
+
+                var link = item.find('a');
+                var icone = item.find('.icone');
+
+                icone.removeClass();
+
+                icone.addClass(classeCarregando);
+
+                var classeLinkAtivo = 'mdi icone mdi-check-circle-outline text-success';
+                var classeLinkInativo = 'mdi icone mdi-alert-circle-outline text-danger';
+
+                //jqXHR
+                ajaxRequest   = $.ajax({
+                    url: '@Url.Action("TesteUrl")',
+                    data: { endereco: link.attr('href') },
+                    async : true,
+                    success: function (data) {
+                        icone.removeClass(classeCarregando);
+                        if (data == true) {
+                            icone.addClass(classeLinkAtivo);
+                        }
+                        else {
+                            icone.addClass(classeLinkInativo);
+                        }
+                    },
+                    error: function () {
+                        icone.removeClass(classeCarregando);
+                        icone.addClass(classeLinkInativo);
+                    }
+
+                });
+
+                ajaxRequestsArray.push(ajaxRequest);
+
+            });
+        };
+
+        setInterval("testeUrl()", 60000);
+
+        $(function () {
+            // Faz a primeira atualização
+            testeUrl();
+        });
+
+    </script>
+}
+
+
+<!-- Modal obs -->
+<div class="modal" id="modalObs">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Observações</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Anexo -->
+<div class="modal" id="modalAnexo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Arquivos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

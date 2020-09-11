@@ -1,0 +1,14 @@
+﻿@model Domain.ClienteAnexos
+
+<div class="container-fluid">
+    <form asp-action="Delete" asp-controller="ClienteAnexos" method="post">
+        <input type="hidden" name="id" asp-for="Id" />
+
+        <h4>@Html.DisplayFor(Model => Model.nome)</h4>
+        <br />
+        <br />
+        <div class="form-actions no-color text-center">
+            <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+        </div>
+    </form>
+</div>

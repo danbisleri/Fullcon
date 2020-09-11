@@ -1,0 +1,524 @@
+﻿@model Domain.Clientes
+@addTagHelper *, Fluxmatix.AspNetCore.TagHelpers.QuillEditor
+
+@{
+    ViewData["Title"] = "Create";
+    Domain.ClienteConexoes listCon = new Domain.ClienteConexoes();
+    string obsConexao = string.Empty;
+
+}
+
+<environment include="Development">
+    <quill-editor-style-sheets></quill-editor-style-sheets>
+</environment>
+
+
+<br />
+<h2 style="text-align:center">Cliente</h2>
+<hr />
+
+<div class="panel-body pan">
+    @*<div class="row">*@
+
+    <div class="col-md-12">
+        <form asp-action="Create" asp-controller="Clientes" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @if (Model != null && Model.Id > 0)
+            {
+                <input type="hidden" asp-for="Id" />
+            }
+
+
+            <div class="form-group row">
+
+                <label asp-for="nome" class="col-sm-2 text-right control-label col-form-label">Nome</label>
+
+                <div class="col-sm-8">
+                    <input asp-for="nome" class="form-control" />
+                    <span asp-validation-for="nome" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-10">
+                    <h4> Conexão</h4>
+                </div>
+            </div>
+
+            <div id="conexao" class="conexao">
+
+                @if (Model == null)
+                {
+                    <div id="conexao0">
+
+                        <div class="conexao">
+                            <div>
+                                <input type="hidden" name="conexao_id" />
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Descrição</label>
+                                    <div class="col-md-8">
+                                        <input id="conexao_desc" name="conexao_desc" type="text" placeholder="" class="form-control input-md">
+                                    </div>
+                                    <button type="button" class="btn btn-danger btn-sm mdi mdi-delete "></button>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">IP / URL</label>
+                                    <div class="col-md-8">
+                                        <input id="conexao_ip" name="conexao_ip" type="text" placeholder="" class="form-control input-md">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Usuario</label>
+                                    <div class="col-md-5">
+                                        <input id="conexao_user" name="conexao_user" type="text" placeholder="" class="form-control input-md">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Senha</label>
+                                    <div class="col-md-5">
+                                        <input id="conexao_pass" name="conexao_pass" type="text" placeholder="" class="form-control input-md">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+
+                                <label asp-for="@obsConexao" class="col-sm-2 text-right control-label col-form-label">Observação</label>
+
+                                <div class="col-md-8">
+
+                                    <quill-editor id="obs"  asp-for="@obsConexao"  name="conexao_obs"  style="background-color:white ; height: 150px">
+
+                                    </quill-editor>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+                else
+                {
+                    foreach (var item in Model.clienteconexao.OrderBy(o => o.DataInclusion))
+                    {
+                        <div class="conexao">
+                            <div>
+                                <input type="hidden" name="conexao_id" asp-for="@item.Id" />
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Descrição</label>
+                                    <div class="col-md-8">
+                                        <input id="conexao_desc" name="conexao_desc" type="text" placeholder="" class="form-control input-md" asp-for="@item.descricao">
+                                    </div>
+                                    <button type="button" class="btn btn-danger btn-sm mdi mdi-delete " onclick="abremodaldel(@item.Id)"></button>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Link</label>
+                                    <div class="col-md-8">
+                                        <input id="conexao_ip" name="conexao_ip" type="text" placeholder="" class="form-control input-md" asp-for="@item.ip">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Usuario</label>
+                                    <div class="col-md-5">
+                                        <input id="conexao_user" name="conexao_user" type="text" placeholder="" class="form-control input-md" asp-for="@item.usuario">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Senha</label>
+                                    <div class="col-md-5">
+                                        <input id="conexao_pass" name="conexao_pass" type="text" placeholder="" class="form-control input-md" asp-for="@item.senha">
+
+                                    </div>
+                                </div>
+                                @if (!string.IsNullOrEmpty(item.obsConexao))
+                                {
+                                    obsConexao = item.obsConexao; 
+
+                                    <div class="form-group row">
+
+                                        <label asp-for="@obsConexao" class="col-sm-2 text-right control-label col-form-label">Observação</label>
+
+                                        <div class="col-md-8">
+
+                                            <quill-editor id="obs" asp-for="@obsConexao" style="background-color:white ; height: 150px">
+
+                                            </quill-editor>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+
+                    }
+
+                    <div id="conexao0">
+                        @*<partial name="_Link" />*@
+
+                    </div>
+                    
+                }
+            </div>
+            <hr />
+
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-10">
+                    <h4> Link</h4>
+                </div>
+            </div>
+
+
+            <div id="field" class="link">
+
+                @if (Model == null)
+                {
+                    <div id="field0">
+
+                        @*<partial name="_Link" />*@
+
+                    </div>
+                }
+                else
+                {
+                    foreach (var item in Model.clientelinks.OrderBy(o => o.nome))
+                    {
+                        <div class="link">
+                            <div>
+                                <input type="hidden" name="linkid" asp-for="@item.Id" />
+                                <!-- Text input-->
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Nome</label>
+                                    <div class="col-md-8">
+                                        <input id="nome_id" name="nomelink" type="text" placeholder="" class="form-control input-md" asp-for="@item.nome">
+                                    </div>
+                                    <button type="button" class="btn btn-danger btn-sm mdi mdi-delete " onclick="abremodaldel(@item.Id)"></button>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Link</label>
+                                    <div class="col-md-8">
+                                        <input id="link_id" name="link" type="text" placeholder="" class="form-control input-md" asp-for="@item.link">
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Usuario</label>
+                                    <div class="col-md-5">
+                                        <input id="user_name" name="user" type="text" placeholder="" class="form-control input-md" asp-for="@item.usuario">
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 text-right control-label col-form-label">Senha</label>
+                                    <div class="col-md-5">
+                                        <input id="pass_name" name="pass" type="text" placeholder="" class="form-control input-md" asp-for="@item.senha">
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+
+                        </div>
+                        <hr />
+
+                    }
+
+                    <div id="field0">
+                        @*<partial name="_Link" />*@
+
+                    </div>
+                }
+            </div>
+
+            <!-- Button -->
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <input id="add-link" name="add-link" value="Add Link" class="btn btn-default col-2" type="button">
+                    </div>
+                </div>
+            </div>
+
+            <div id="anexo" class="file">
+                @if (Model == null)
+                {
+                    <div id="anexo0">
+                        @*<partial name="_File" />*@
+                    </div>
+                }
+                else
+                {
+                    @if (Model.clienteanexos != null && Model.clienteanexos.Any())
+                    {
+                        foreach (var item in Model.clienteanexos.OrderBy(n => n.nome))
+                        {
+
+                            <div class="form-group row">
+                                <input type="hidden" name="idAnexo" asp-for="@item.Id" />
+
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-success btn-sm mdi mdi-download " onclick="location.href='@Url.Action("DownloadAsync","ClienteAnexos", new { id = item.Id })'"></button>
+                                </div>
+
+                                <div class="col-md-7">
+                                    @Html.DisplayFor(Model => item.nome)
+                                </div>
+
+                                <button type="button" class="btn btn-danger btn-sm mdi mdi-delete " onclick="abremodaldelclianexo(@item.Id)"></button>
+
+                            </div>
+
+                        }
+                    }
+                    <div id="anexo0">
+                        @*<partial name="_File" />*@
+                    </div>
+                }
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-10">
+                    <input id="add-file" name="add-file" value="Add File" class="btn btn-default col-2" type="button" />
+                </div>
+            </div>
+
+            <div>&nbsp;</div>
+
+            <div class="form-group row">
+
+                <div class="col-md-12">
+                    <label asp-for="obs" class="control-label">Observação</label>
+                    <quill-editor id="obs_cli" asp-for="obs" style="background-color:white ; height: 150px">
+
+                    </quill-editor>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-1">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
+                <div class="col-md-10">
+                </div>
+                <div class="col-md-1">
+                    @if (Model != null)
+                    {
+                        <input class="btn btn-danger" value="Remove" onclick="abremodaldelcli(@Model.Id)" type="button">
+                    }
+
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <quill-editor-script for-editors="obs,obs_cli"></quill-editor-script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('div').before(function () {
+                $(this).removeAttr('data-placeholder');
+            });
+
+            $('#ql-editor').after(function () {
+                $(this).style.backgroundColor = 'white';
+            });
+
+            var nLinkAdd = 0;
+            var nextLink = 0;
+            $("#add-link").click(function (e) {
+
+                e.preventDefault();
+
+                var addto = "#field0";
+
+                nextLink = nextLink + 1;
+
+                if (nLinkAdd > 0)
+                    addto = "#field" + nLinkAdd;
+
+                for (var i = nLinkAdd ; i >= 0; i--) {
+                    if ($(addto).length > 0) {
+                        break;
+                    } else {
+                        addto = "#field" + i;
+                    }
+                }
+
+                var inputDelete = ' <div id="field' + nextLink + '" name="field' + nextLink + '"  > ' + '<div class="form-group row"> <label class="col-sm-2 text-right control-label col-form-label">Nome</label><div class="col-md-8"><input id="nome_id" name="nomelink" type="text" placeholder="" class="form-control input-md"></div> <button id="remove' + (nextLink) + '" type="button" class="btn btn-danger btn-sm mdi mdi-delete removelink"></button> </div> <div class="form-group row"> <label class="col-sm-2 text-right control-label col-form-label">Link</label> <div class="col-md-8"> <input id="link_id" name="link" type="text" placeholder="" class="form-control input-md"> </div> </div> <div class="form-group row"> <label class="col-sm-2 text-right control-label col-form-label">Usuario</label> <div class="col-md-5"> <input id="user_name" name="user" type="text" placeholder="" class="form-control input-md"> </div> </div> <div class="form-group row"> <label class="col-sm-2 text-right control-label col-form-label">Senha</label> <div class="col-md-5"> <input id="pass_name" name="pass" type="text" placeholder="" class="form-control input-md"> </div> </div> <hr /> </div>'
+
+                //prompt("Copy to clipboard: Ctrl+C, Enter", inputDelete);
+
+                $(addto).after(inputDelete);
+
+                $("#field" + nextLink).attr('data-source', $(addto).attr('data-source'));
+                $("#count").val(nextLink);
+
+                nLinkAdd = nLinkAdd + 1;
+
+                $('.removelink').click(function (e) {
+                    e.preventDefault();
+                    var fieldNum = this.id.charAt(this.id.length - 1);
+                    //alert(fieldNum);
+                    var fieldID = "#field" + fieldNum;
+                    var divID = "#remove" + fieldNum;
+                    $(this).remove();
+                    $(fieldID).remove();
+                    $(divID).remove();
+                });
+            });
+
+            var nFiledAdd = 0;
+            var nextField = 0;
+            $("#add-file").click(function (e) {
+
+                e.preventDefault();
+
+                var addto = "#anexo0";
+                var _link = $('#anexo0').html();
+
+                nextField = nextField + 1;
+
+                if (nFiledAdd > 0 )
+                    addto = "#anexo" + nFiledAdd;
+
+                for (var i = nLinkAdd; i >= 0; i--) {
+                    if ($(addto).length > 0) {
+                        break;
+                    } else {
+                        addto = "#anexo" + i;
+                    }
+                }
+
+                //prompt("Copy to clipboard: Ctrl+C, Enter", _link);
+
+                var inputDelete = '<div id="anexo' + nextField + '" name="anexo' + nextField + '"> ' + _link.replace(/value[^>]*(.*?)\s*\s*/g, '') + '<div class="form-group row" id="removeanexo' + (nextField) + '"> <div class="col-md-2"> </div> <div class="col-md-8"> <input type="file" id="action_file" name="file" class="input-file col-md-8"> </div> <button id="removeanexo' + (nextField) + '" type="button"class="btn btn-danger btn-sm mdi mdi-delete removeanexo"></button> </div> </div> </div>'
+
+                //alert(newIn + removeBtn);
+                //prompt("Copy to clipboard: Ctrl+C, Enter", inputDelete);
+                $(addto).after(inputDelete);
+
+
+                $("#anexo" + nextField).attr('data-source', $(addto).attr('data-source'));
+                $("#count").val(nextField);
+
+                nFiledAdd = nFiledAdd + 1;
+
+                $('.removeanexo').click(function (e) {
+                    e.preventDefault();
+                    var fieldNum = this.id.charAt(this.id.length - 1);
+                    var fieldID = "#anexo" + fieldNum;
+                    var divID = "#removeanexo" + fieldNum;
+                    $(this).remove();
+                    $(fieldID).remove();
+                    $(divID).remove();
+                });
+            });
+
+        });
+
+        function abremodaldel(id) {
+            var modal = $('#modalDel');
+            var modalBody = modal.find('.modal-body');
+
+            $.ajax({
+                url: '@Url.Action("ModalDel")',
+                data: { id: id },
+                success: function (data)
+                {
+                    modalBody.html(data);
+                    modal.modal();
+                }
+
+            })
+        };
+
+        function abremodaldelcli(id) {
+            var modal = $('#modalDel');
+            var modalBody = modal.find('.modal-body');
+
+            $.ajax({
+                url: '@Url.Action("ModalDelCliente")',
+                data: { id: id },
+                success: function (data)
+                {
+                    modalBody.html(data);
+                    modal.modal();
+                }
+
+            })
+        };
+
+
+        function abremodaldelclianexo(id) {
+            var modal = $('#modalDel');
+            var modalBody = modal.find('.modal-body');
+
+            $.ajax({
+                url: '@Url.Action("ModalDelAnexo")',
+                data: { id: id },
+                success: function (data)
+                {
+                    modalBody.html(data);
+                    modal.modal();
+                }
+
+            })
+        };
+
+    </script>
+}
+
+
+<div class="modal" id="modalDel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title text-center">Confirme a exclusão</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

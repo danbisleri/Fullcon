@@ -1,0 +1,153 @@
+﻿@model IEnumerable<Domain.KnowBase>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<h2>Index</h2>*@
+
+
+@*<th>
+        @Html.DisplayNameFor(model => model.erro)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.descricao)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.solucao)
+    </th>*@
+@*<th>
+        @Html.DisplayNameFor(model => model.obs)
+    </th>*@
+
+
+<style value="text/css">
+    #card1 {
+        margin-top: 15px;
+        border: 1px solid grey;
+        box-shadow: 1px 0 2px 0;
+    }
+
+    #card-body1 {
+        background-color: #e2e2e2;
+    }
+
+    #box-titulo {
+        margin-top: 0px !important;
+    }
+
+    #button-edit {
+        font-size: 15px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    #titulo {
+        background-color: #1f262d;
+        margin-left: 10px;
+        font-size: 13px;
+        color: #e2e2e2;
+        font-weight: 900 !important;
+        text-transform: uppercase;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        min-width: 50%;
+        padding: 10px;
+        float: left;
+        margin-top: 0px !important;
+        padding-right: 5%;
+        padding-left: 3%;
+    }
+
+    #hr {
+        width: 50%;
+        height: 3px;
+        background-color: #b6b6b6;
+        color: #e2e2e2;
+        float: inherit;
+        text-align: center;
+        vertical-align: middle;
+        margin: auto;
+        border: 0 none;
+        border-radius: 5px;
+        margin-top: 30px;
+        margin-bottom: 30px
+    }
+</style>
+
+
+@foreach (var item in Model)
+{
+
+    <div class="card" id="card1">
+        <div class="card-body" style="padding-top:0px">
+            <div class="row">
+                <input type="hidden" name="knowid" asp-for="@item.Id" />
+                <div class="col-md-10" id="box-titulo">
+                    @if (!string.IsNullOrEmpty(item.descricao))
+                    {
+                        <h4 id="titulo"> @Html.DisplayFor(modelItem => item.descricao)</h4>
+                    }
+                </div>
+                <div class="col-md-2" style="text-align:right">
+                    <button type="button" class="btn btn-warning btn-sm mdi mdi-account-edit" id="button-edit" onclick="location.href='@Url.Action("Edit", new { id = item.Id })'"></button>
+                </div>
+                <div class="col-md-12">
+                    <div class="card" style="background-color:white">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Mensagem</h5>
+                                    @Html.Raw(item.erro)
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Solução</h5>
+                                    @Html.Raw(item.solucao)
+                                </div>
+                            </div>
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.obs))
+                        {
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body" id="card-body1">
+                                        <h5>Observação</h5>
+                                        @Html.Raw(item.obs)
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (item.knowbaseanexo != null && item.knowbaseanexo.Any())
+                        {
+                            var line = 0;
+
+                            <div class="form-group row">
+                                 
+                                @foreach (var anexo in item.knowbaseanexo.OrderBy(n => n.nome))
+                                {
+                                    line = line + 1;
+
+                                    <input type="hidden" name="idAnexo" asp-for="@anexo.Id" />
+
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-success btn-sm mdi mdi-download " onclick="location.href='@Url.Action("DownloadAsync","KnowBaseAnexos", new { id = anexo.Id })'"></button>
+                                        @Html.DisplayFor(Model => anexo.nome)
+                                    </div>
+
+                                    @if (line % 3 == 0 )
+                                    {
+                                        <div class="form-group row">&nbsp;
+                                        </div>
+                                    }
+
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr id="hr"/>
+}

@@ -1,0 +1,182 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Helper\**" />
+    <Content Remove="Helper\**" />
+    <EmbeddedResource Remove="Helper\**" />
+    <None Remove="Helper\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\icons\font-awesome\less\fa-brands.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\fa-regular.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\fa-solid.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\fontawesome.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_animated.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_bordered-pulled.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_core.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_fixed-width.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_icons.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_larger.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_list.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_mixins.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_rotated-flipped.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_screen-reader.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_stacked.less" />
+    <None Include="wwwroot\css\icons\font-awesome\less\_variables.less" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\fa-brands.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\fa-regular.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\fa-solid.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\fontawesome.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_animated.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_core.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_fixed-width.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_icons.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_larger.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_list.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_mixins.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_screen-reader.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_stacked.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\scss\_variables.scss" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\css\icons\font-awesome\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.svg" />
+    <None Include="wwwroot\css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <None Include="wwwroot\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.svg" />
+    <None Include="wwwroot\css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.woff2" />
+    <None Include="wwwroot\css\icons\themify-icons\fonts\themify.svg" />
+    <None Include="wwwroot\css\icons\themify-icons\ie7\ie7.js" />
+    <None Include="wwwroot\css\icons\themify-icons\themify-icons.less" />
+    <None Include="wwwroot\css\icons\weather-icons\fonts\weathericons-regular-webfont.svg" />
+    <None Include="wwwroot\css\icons\weather-icons\fonts\weathericons-regular-webfont.woff2" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-beaufort.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-day.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-direction.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-misc.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-moon-aliases.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-moon.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-neutral.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-night.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-time.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-wind-aliases.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-wind-degrees.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-classes\classes-wind.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-beaufort.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-day.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-direction.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-misc.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-moon.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-neutral.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-night.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-time.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\icon-variables\variables-wind-names.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\mappings\wi-forecast-io.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\mappings\wi-owm.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\mappings\wi-wmo4680.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\mappings\wi-yahoo.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons-classes.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons-core.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons-variables.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons-wind.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons-wind.min.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons.less" />
+    <None Include="wwwroot\css\icons\weather-icons\less\weather-icons.min.less" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-beaufort.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-day.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-direction.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-misc.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-moon-aliases.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-moon.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-neutral.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-night.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-time.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-wind-aliases.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-wind-degrees.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-classes\classes-wind.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-beaufort.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-day.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-direction.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-misc.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-moon.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-neutral.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-night.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-time.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\icon-variables\variables-wind-names.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\mappings\wi-forecast-io.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\mappings\wi-owm.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\mappings\wi-wmo4680.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\mappings\wi-yahoo.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons-classes.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons-core.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons-variables.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons-wind.min.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons-wind.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons.min.scss" />
+    <None Include="wwwroot\css\icons\weather-icons\sass\weather-icons.scss" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\dataTables.bootstrap.js" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\dataTables.bootstrap.min.js" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\dataTables.bootstrap4.js" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\dataTables.bootstrap4.min.js" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\dataTables.foundation.js" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\dataTables.foundation.min.js" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\dataTables.jqueryui.js" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\dataTables.jqueryui.min.js" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\dataTables.semanticui.js" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\dataTables.semanticui.min.js" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\jquery.dataTables.js" />
+    <None Include="wwwroot\extra-libs\DataTables\DataTables-1.10.16\js\jquery.dataTables.min.js" />
+    <None Include="wwwroot\extra-libs\DataTables\datatables.js" />
+    <None Include="wwwroot\extra-libs\DataTables\datatables.min.js" />
+    <None Include="wwwroot\extra-libs\gritter\jquery.gritter.min.js" />
+    <None Include="wwwroot\extra-libs\multicheck\datatable-checkbox-init.js" />
+    <None Include="wwwroot\extra-libs\multicheck\jquery.multicheck.js" />
+    <None Include="wwwroot\extra-libs\sparkline\sparkline.js" />
+    <None Include="wwwroot\js\pages\calendar\cal-init.js" />
+    <None Include="wwwroot\js\pages\chart\chart-init.js" />
+    <None Include="wwwroot\js\pages\chart\chart-page-init.js" />
+    <None Include="wwwroot\js\pages\dashboards\dashboard1.js" />
+    <None Include="wwwroot\js\pages\maps\map-google.init.js" />
+    <None Include="wwwroot\js\pages\mask\mask.init.js" />
+    <None Include="wwwroot\js\pages\sparkline\jquery.charts-sparkline.js" />
+    <None Include="wwwroot\lib\pages\calendar\cal-init.js" />
+    <None Include="wwwroot\lib\pages\chart\chart-init.js" />
+    <None Include="wwwroot\lib\pages\chart\chart-page-init.js" />
+    <None Include="wwwroot\lib\pages\dashboards\dashboard1.js" />
+    <None Include="wwwroot\lib\pages\maps\map-google.init.js" />
+    <None Include="wwwroot\lib\pages\mask\mask.init.js" />
+    <None Include="wwwroot\lib\pages\sparkline\jquery.charts-sparkline.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BundlerMinifier.Core" Version="2.9.406" />
+    <PackageReference Include="Fluxmatix.AspNetCore.TagHelpers.QuillEditor" Version="0.2.0" />
+    <PackageReference Include="Fluxmatix.AspNetCore.TagHelpers.ResizeProxyImg" Version="0.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DBConnection\DBConnection.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Clientes\modal_deleteclianexo.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\KnowBases\modal_deleteknowanexo.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+</Project>
