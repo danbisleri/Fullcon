@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBConnection", "DBConnectio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FullCon2", "FullCon2\FullCon2.csproj", "{4F1ADA65-9422-4128-88A2-BE37A9F03976}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWPF", "ClientWPF\ClientWPF.csproj", "{05A67746-322B-48F1-8473-C309A1F5142B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4F1ADA65-9422-4128-88A2-BE37A9F03976}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F1ADA65-9422-4128-88A2-BE37A9F03976}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F1ADA65-9422-4128-88A2-BE37A9F03976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A67746-322B-48F1-8473-C309A1F5142B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A67746-322B-48F1-8473-C309A1F5142B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A67746-322B-48F1-8473-C309A1F5142B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A67746-322B-48F1-8473-C309A1F5142B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

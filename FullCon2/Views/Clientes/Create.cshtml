@@ -93,7 +93,7 @@
 
                                 <div class="col-md-8">
 
-                                    <quill-editor id="obs"  asp-for="@obsConexao"  name="conexao_obs"  style="background-color:white ; height: 150px">
+                                    <quill-editor id="obs" asp-for="@obsConexao" name="conexao_obs" style="background-color:white ; height: 150px">
 
                                     </quill-editor>
                                 </div>
@@ -139,7 +139,7 @@
                                 </div>
                                 @if (!string.IsNullOrEmpty(item.obsConexao))
                                 {
-                                    obsConexao = item.obsConexao; 
+                                    obsConexao = item.obsConexao;
 
                                     <div class="form-group row">
 
@@ -163,8 +163,18 @@
                         @*<partial name="_Link" />*@
 
                     </div>
-                    
                 }
+
+                <!-- Button -->
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <input id="add-con" name="add-con" value="Add Connection" class="btn btn-default col-2" type="button">
+                        </div>
+                    </div>
+                </div>
             </div>
             <hr />
 

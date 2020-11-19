@@ -11,6 +11,7 @@ using System.Net;
 using System.Threading;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace FullCon2.Controllers
 {
@@ -260,13 +261,14 @@ namespace FullCon2.Controllers
                         }
                     }
 
+
                     clientes.clientelinks = cliLink;
 
                     clientes.clienteconexao = cliConexao;
 
                     clientes.clienteanexos = cliAnexo;
 
-                    
+                    var json = JsonConvert.SerializeObject(clientes);
 
                     _context.Add(clientes);
 
