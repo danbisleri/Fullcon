@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FullCon2</title>
 
-    <environment include="Development">
+    <environment include="Staging, Production">
         @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
         @*<link rel="stylesheet" href="~/css/site.css" />*@
 
         <!-- Custom CSS -->
-        <link href="~/lib/flot/css/float-chart.css" rel="stylesheet">
+        <link href="/lib/flot/css/float-chart.css" rel="stylesheet">
         <!-- Custom CSS -->
-        <link href="~/css/style.min.css" rel="stylesheet">
+        <link href="/css/style.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="~/lib/quill/dist/quill.snow.css">
 
     </environment>
@@ -43,35 +43,35 @@
 
 
 
-<environment include="Development">
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+<environment include="Staging, Production">
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/js/site.js" asp-append-version="true"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="~/lib/popper.js/dist/umd/popper.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/lib/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="~/extra-libs/sparkline/sparkline.js"></script>
+    <script src="/lib/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/lib/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/extra-libs/sparkline/sparkline.js"></script>
     <!--Wave Effects -->
-    <script src="~/js/waves.js"></script>
+    <script src="/js/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="~/js/sidebarmenu.js"></script>
+    <script src="/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="~/js/custom.min.js"></script>
+    <script src="/js/custom.min.js"></script>
     <!--This page JavaScript -->
     <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
     <!-- Charts js Files -->
-    <script src="~/lib/flot/excanvas.js"></script>
-    <script src="~/lib/flot/jquery.flot.js"></script>
-    <script src="~/lib/flot/jquery.flot.pie.js"></script>
-    <script src="~/lib/flot/jquery.flot.time.js"></script>
-    <script src="~/lib/flot/jquery.flot.stack.js"></script>
-    <script src="~/lib/flot/jquery.flot.crosshair.js"></script>
-    <script src="~/lib/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="~/js/pages/chart/chart-page-init.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
+    <script src="/lib/flot/excanvas.js"></script>
+    <script src="/lib/flot/jquery.flot.js"></script>
+    <script src="/lib/flot/jquery.flot.pie.js"></script>
+    <script src="/lib/flot/jquery.flot.time.js"></script>
+    <script src="/lib/flot/jquery.flot.stack.js"></script>
+    <script src="/lib/flot/jquery.flot.crosshair.js"></script>
+    <script src="/lib/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="/js/pages/chart/chart-page-init.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     @*<script src="~/lib/quill/dist/quill.min.js"></script>*@
 
     <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>

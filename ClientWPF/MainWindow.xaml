@@ -7,6 +7,59 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="60*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="btEnviar" Content="Enviar" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Center" Height="44" Width="168" Click="btEnviar_Click"/>
+        <Button x:Name="btConfig" Content="Config" HorizontalAlignment="Left"  Margin="737,17,0,0" Grid.Row="7" VerticalAlignment="Top" Height="27" Width="53" Click="btConfig_Click"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="450*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="lbCliente" Content="Cliente" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Bold" FontSize="14"/>
+            <TextBox x:Name="textBoxCliente" Grid.Column="1" Text="" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="450*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="lbNome" Content="Nome" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Bold" FontSize="14"/>
+            <TextBox x:Name="textBoxNome" Grid.Column="1" Text="" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="450*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="lbLink" Content="Link" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Bold" FontSize="14"/>
+            <TextBox x:Name="textBoxLink" Grid.Column="1" Text="" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+        </Grid>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="450*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="lbUser" Content="Usuário" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Bold" FontSize="14"/>
+            <TextBox x:Name="textBoxUser" Grid.Column="1" Text="" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+        </Grid>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="450*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="lbPass" Content="Password" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Bold" FontSize="14"/>
+            <TextBox x:Name="textBoxPass" Grid.Column="1" Text="" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+        </Grid>
+        <Label x:Name="label" Content="Cliente API " HorizontalAlignment="Center" Margin="0,13,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
 
     </Grid>
 </Controls:MetroWindow>
